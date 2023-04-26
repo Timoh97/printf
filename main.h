@@ -28,7 +28,7 @@
  * @start: A pointer to the start of buffer.
  * @len: The length of the string stored in buffer.
  */
-typedef struct buffer_1
+typedef struct buffer_s
 {
 	char *buffer;
 	char *start;
@@ -40,19 +40,19 @@ typedef struct buffer_1
  * @specifier: A character representing a conversion specifier.
  * @func: A pointer to a conversion function corresponding to specifier.
  */
-typedef struct converter_1
+typedef struct converter_s
 {
 	unsigned char specifier;
-	unsigned int (*func)(va_list, buffer_2 *,
+	unsigned int (*func)(va_list, buffer_t *,
 			unsigned char, int, int, unsigned char);
-} converter_2;
+} converter_t;
 
 /**
- * struct flag_1 - A new type defining a flags struct.
+ * struct flag_s - A new type defining a flags struct.
  * @flag: A character representing a flag.
  * @value: The integer value of the flag.
  */
-typedef struct flag_1
+typedef struct flag_s
 {
 	unsigned char flag;
 	unsigned char value;
@@ -89,11 +89,11 @@ unsigned int convert_R(va_list args, buffer_t *output,
 		unsigned char flags, int wid, int prec, unsigned char len);
 
 /* Handlers */
-unsigned char handle_flagging(const char *flags, char *index);
-unsigned char handle_len(const char *modifier, char *index);
-int handle_wid(va_list args, const char *modifier, char *index);
-int handle_prec(va_list args, const char *modifier, char *index);
-unsigned int (*handle_specs(const char *specifier))(va_list, buffer_t *,
+unsigned char handle_flags(const char *flags, char *index);
+unsigned char handle_length(const char *modifier, char *index);
+int handle_width(va_list args, const char *modifier, char *index);
+int handle_precision(va_list args, const char *modifier, char *index);
+unsigned int (*handle_specifiers(const char *specifier))(va_list, buffer_t *,
 		unsigned char, int, int, unsigned char);
 
 /* Modifiers */
@@ -105,7 +105,7 @@ unsigned int print_neg_width(buffer_t *output, unsigned int printed,
 		unsigned char flags, int wid);
 
 /* Helper Functions */
-buffer_t *initialize_buffer(void);
+buffer_t *init_buffer(void);
 void free_buffer(buffer_t *output);
 unsigned int _memcpy(buffer_t *output, const char *src, unsigned int n);
 unsigned int convert_sbase(buffer_t *output, long int num, char *base,
