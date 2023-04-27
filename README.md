@@ -496,5 +496,4 @@ Output:
 
 ## Authors :black_nib:
 
-* Bryson Nyamwange [brysonwaisi](https://github.com/brysonwaisi)
-* Flovian Owiti [flovian](https://github.com/flovian)
+* Timothy Mugendi
